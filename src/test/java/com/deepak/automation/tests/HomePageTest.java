@@ -24,6 +24,7 @@ public class HomePageTest {
         String title = driver.getTitle();
         Thread.sleep(2000);
         System.out.println(url);
+        Thread.sleep(2000);
         System.out.println(title);
         Assertions.assertEquals("The Internet", title);
     }
