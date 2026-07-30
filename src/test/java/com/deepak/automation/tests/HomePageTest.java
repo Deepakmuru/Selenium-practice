@@ -1,5 +1,4 @@
 package com.deepak.automation.tests;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
@@ -7,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+// Basic auth handled via credentials in URL
 
 public class HomePageTest {
 
     WebDriver driver;
-
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
@@ -21,7 +20,6 @@ public class HomePageTest {
         driver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(6));
 
     }
-
     @Test
     @Order (1)
     void Homepagetest() throws InterruptedException {
@@ -36,28 +34,36 @@ public class HomePageTest {
 
     @Test
     @Order (2)
-    void ModulesLinkTestOpen_all_at_single_testcase() {
-        
-        driver.findElement(By.linkText("A/B Testing")).click();
+    void ModulesTest_AB_Testing() {
+          driver.findElement(By.linkText("A/B Testing")).click();
         String title = driver.findElement(By.cssSelector("h3")).getText();
         System.out.println(title);
         String contextInABTesting = driver.findElement(By.cssSelector("p")).getText();
         System.out.println(contextInABTesting);
-        
-    }
+           }
 
     @Test
     @Order (3)
-    void ModulesLinkTestOpen_all_at_single_testcase_2() throws InterruptedException {
-       
+    void ModulesTest_Add_Remove_Elements() throws InterruptedException {
         driver.findElement(By.linkText("Add/Remove Elements")).click();
         String title = driver.findElement(By.cssSelector("h3")).getText();
         System.out.println(title);
         driver.findElement(By.cssSelector("button[onclick='addElement()']")).click();
         driver.findElement(By.cssSelector("button[onclick='deleteElement()']")).click();
-       
-
+         }
+        
+    @Test
+    @Order (4)
+    void ModulesTest_Basic_Auth() {
+        // navigate directly with credentials to avoid Alert/UserAndPassword usage
+        driver.get("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+        String title = driver.findElement(By.cssSelector("h3")).getText();
+        System.out.println(title);
+        String contextInBasicAuth = driver.findElement(By.cssSelector("p")).getText();
+        System.out.println(contextInBasicAuth);
     }
+        
+    
 
 
 
