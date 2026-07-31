@@ -1,5 +1,6 @@
 package com.deepak.automation.tests;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,17 @@ public class HomePageTest {
         System.out.println(title);
         String contextInBasicAuth = driver.findElement(By.cssSelector("p")).getText();
         System.out.println(contextInBasicAuth);
+    }
+
+    @Test
+    @Order (5)
+    void ModulesTest_Broken_image()
+    {
+        driver.get("https://the-internet.herokuapp.com/broken_images");
+        String title = driver.findElement(By.cssSelector("h3")).getText();
+        System.out.println(title);
+        Assertions.assertEquals("Broken Images", title);
+
     }
         
     
