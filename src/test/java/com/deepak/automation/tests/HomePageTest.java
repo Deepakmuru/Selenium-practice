@@ -18,7 +18,7 @@ public class HomePageTest {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get("https://the-internet.herokuapp.com/");
-        driver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(6));
+         driver.manage().timeouts().implicitlyWait(java.util.Objects.requireNonNull(java.time.Duration.ofSeconds(5)));
 
     }
     @Test
@@ -72,6 +72,17 @@ public class HomePageTest {
         String title = driver.findElement(By.cssSelector("h3")).getText();
         System.out.println(title);
         Assertions.assertEquals("Broken Images", title);
+
+    }
+
+    @Test
+    @Order (6)
+    void ModulesTest_Challenging_Dom() throws InterruptedException {
+        driver.get("https://the-internet.herokuapp.com/challenging_dom");
+        String title = driver.findElement(By.cssSelector("h3")).getText();
+        System.out.println(title);
+        Assertions.assertEquals("Challenging DOM", title);
+        System.out.println(driver.findElement(By.id("canvas")).getScreenshotAs(org.openqa.selenium.OutputType.FILE));
 
     }
         
